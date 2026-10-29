@@ -11,10 +11,52 @@ public class Main {
         int backlogs = scanner.nextInt();
         int graduationYear = scanner.nextInt();
 
-        System.out.println("Candidate: " + name);
-        System.out.println("Percentage: " + percentage);
-        System.out.println("Backlogs: " + backlogs);
-        System.out.println("Graduation Year: " + graduationYear);
+        int skillCount = scanner.nextInt();
+        String[] skills = new String[skillCount];
+
+        for (int i = 0; i < skillCount; i++) {
+            skills[i] = scanner.next();
+        }
+
+        Candidate candidate = new Candidate(
+                name,
+                percentage,
+                backlogs,
+                graduationYear,
+                skills
+        );
+
+        Job job = new Job(
+                "Infosys",
+                "Java Developer",
+                65.0,
+                0,
+                2026
+        );
+
+        EligibilityChecker checker = new EligibilityChecker();
+
+        System.out.println("================================");
+        System.out.println("PLACEMENT ELIGIBILITY RESULT");
+        System.out.println("================================");
+        System.out.println();
+
+        System.out.println("Candidate : " + candidate.getName());
+        System.out.println("Company   : " + job.getCompany());
+        System.out.println("Role      : " + job.getRole());
+        System.out.println();
+
+        boolean eligible = checker.evaluate(candidate, job);
+
+        System.out.println();
+
+        if (eligible) {
+            System.out.println("Final Result : ELIGIBLE");
+        } else {
+            System.out.println("Final Result : NOT ELIGIBLE");
+        }
+
+        System.out.println("================================");
 
         scanner.close();
     }
